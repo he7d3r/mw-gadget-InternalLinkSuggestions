@@ -58,7 +58,7 @@ function processSuggestions() {
 	newText = $text.val();
 	for ( i = 0; i < wantedLinks.length; i++ ){
 		oldText = newText;
-		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')(?![^\\[]*\\]\\]|.+={1,6}\\n)', 'i' );
+		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')(?![a-z]|[^\\[]*\\]\\]|.+={1,6}\\n)', 'i' );
 		newText = oldText.replace( reLink, linkCreator );
 		if( newText!== oldText ){
 			$text.val( newText );
@@ -81,6 +81,9 @@ function processSuggestions() {
 
 function processLinksFromOtherWiki( data ) {
 	var i, title, llinks;
+	if( !data.query ){
+		return;
+	}
 	for ( i = 0; i < data.query.pageids.length; i++ ){
 		llinks = data.query.pages[ data.query.pageids[ i ] ].langlinks;
 		if( !llinks ){
