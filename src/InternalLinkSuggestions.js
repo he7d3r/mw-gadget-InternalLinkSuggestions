@@ -51,8 +51,8 @@ function processSuggestions() {
 	newText = $text.val();
 	for ( i = 0; i < wantedLinks.length; i++ ){
 		oldText = newText;
-		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')', 'i' );
-		newText = oldText.replace( reLink, '[[' + wantedLinks[i] + '|$1]](?!\\]\\])' );
+		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')(?!\\]\\])', 'i' );
+		newText = oldText.replace( reLink, '[[' + wantedLinks[i] + '|$1]]' );
 		if( newText!== oldText ){
 			$text.val( newText );
 			addedLinks.push( wantedLinks[i] );
