@@ -34,7 +34,14 @@ function processSuggestions() {
 	var i, reLink, oldText, newText, $diffLiveButton,
 		$text = $( '#wpTextbox1' ),
 		wantedLinks = [],
-		addedLinks = [];
+		addedLinks = [],
+		linkCreator = function( target, text ){
+			if( wantedLinks[i].slice(1) === target.slice(1) ){
+				return '[[' + text + ']]';
+			} else {
+				return '[[' + wantedLinks[i] + '|' + text + ']]';
+			}
+		};
 	mw.notify(
 		mw.msg( 'ils-applying-suggestions' ),
 		{
@@ -51,8 +58,8 @@ function processSuggestions() {
 	newText = $text.val();
 	for ( i = 0; i < wantedLinks.length; i++ ){
 		oldText = newText;
-		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')(?!\\]\\])', 'i' );
-		newText = oldText.replace( reLink, '[[' + wantedLinks[i] + '|$1]]' );
+		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')(?![^\\[]*\\]\\]|.+={1,6}\\n)', 'i' );
+		newText = oldText.replace( reLink, linkCreator );
 		if( newText!== oldText ){
 			$text.val( newText );
 			addedLinks.push( wantedLinks[i] );
