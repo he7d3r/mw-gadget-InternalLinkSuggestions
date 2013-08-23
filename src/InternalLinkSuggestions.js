@@ -35,11 +35,11 @@ function processSuggestions() {
 		$text = $( '#wpTextbox1' ),
 		wantedLinks = [],
 		addedLinks = [],
-		linkCreator = function( target, text ){
-			if( wantedLinks[i].slice(1) === target.slice(1) ){
-				return '[[' + text + ']]';
+		linkCreator = function( target, previousChar, text ){
+			if( wantedLinks[i].slice(1) === target.slice(2) ){
+				return previousChar + '[[' + text + ']]';
 			} else {
-				return '[[' + wantedLinks[i] + '|' + text + ']]';
+				return previousChar + '[[' + wantedLinks[i] + '|' + text + ']]';
 			}
 		};
 	mw.notify(
@@ -59,7 +59,7 @@ function processSuggestions() {
 	for ( i = 0; i < wantedLinks.length; i++ ){
 		oldText = newText;
 		reLink = new RegExp(
-			'(' + $.escapeRE( wantedLinks[i] ) +
+			'([^a-záàâãçéêíñóôõúü\\-])(' + $.escapeRE( wantedLinks[i] ) +
 			')(?![a-záàâãçéêíñóôõúü\\-]|[^\\[]*\\]\\]|.+={1,6}\\n)',
 			'i'
 		);
@@ -72,6 +72,8 @@ function processSuggestions() {
 	$diffLiveButton = $( '#wpDiffLive' );
 	if( $diffLiveButton.length ){
 		$diffLiveButton.click();
+	} else {
+		$( '#wpDiff' ).click();
 	}
 	mw.notify(
 		mw.msg( 'ils-done', addedLinks.length ),
