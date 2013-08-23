@@ -58,7 +58,11 @@ function processSuggestions() {
 	newText = $text.val();
 	for ( i = 0; i < wantedLinks.length; i++ ){
 		oldText = newText;
-		reLink = new RegExp( '(' + $.escapeRE( wantedLinks[i] ) + ')(?![a-z]|[^\\[]*\\]\\]|.+={1,6}\\n)', 'i' );
+		reLink = new RegExp(
+			'(' + $.escapeRE( wantedLinks[i] ) +
+			')(?![a-záàâãçéêíñóôõúü\\-]|[^\\[]*\\]\\]|.+={1,6}\\n)',
+			'i'
+		);
 		newText = oldText.replace( reLink, linkCreator );
 		if( newText!== oldText ){
 			$text.val( newText );
@@ -198,11 +202,9 @@ function getLanguageLinks(){
 				}
 			}
 		}
-		for ( i = 0; i < sourceWikis.length; i++ ){
-			if( sourcePages[ sourceWikis[i] ] === undefined ){
-				sourceWikis.splice(i, 1);
-			}
-		}
+		sourceWikis = $.grep( sourceWikis, function( lang ){
+			return sourcePages[ lang ] !== undefined;
+		} );
 		getInternalLinks();
 	} )
 	.fail( removeSpinner );
