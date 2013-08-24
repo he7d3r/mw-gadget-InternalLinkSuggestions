@@ -23,7 +23,7 @@ mw.messages.set( {
 var existingLinks, api,
 	sourceWikis = [ 'en', 'de', 'es', 'fr', 'it', 'nl', 'ru', 'sv' ],
 	sourcePages = {},
-	threshold = 1,
+	threshold = 2,
 	suggested = {};
 
 function removeSpinner() {
