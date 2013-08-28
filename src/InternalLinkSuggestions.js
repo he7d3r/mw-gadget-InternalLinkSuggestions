@@ -78,6 +78,7 @@ function processSuggestions() {
 	mw.notify(
 		mw.msg( 'ils-done', addedLinks.length ),
 		{
+			autoHide: false,
 			tag: 'internal-links-suggestions',
 			title: mw.msg( 'ils-done-title' )
 		}
