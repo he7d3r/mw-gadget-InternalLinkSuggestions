@@ -50,7 +50,11 @@ function processSuggestions() {
 		}
 	);
 	wantedLinks = $.map( suggested, function( value, key ){
-		if( value < threshold || $.inArray( key, existingLinks ) !== -1 ){
+		if( value < threshold
+			|| $.inArray( key, existingLinks ) !== -1
+			// Links to years are not very useful
+			|| /^\d+$/.test( key )
+		){
 			return null;
 		}
 		return key;
