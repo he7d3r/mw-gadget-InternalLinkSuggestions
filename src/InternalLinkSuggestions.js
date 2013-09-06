@@ -16,8 +16,9 @@ mw.messages.set( {
 	'ils-getting-internal-links': 'Obtendo links internos desta página...',
 	'ils-processing-data': 'Obtendo dados',
 	'ils-applying-suggestions': 'Incluindo links sugeridos...',
-	'ils-done-title': 'Pronto!',
-	'ils-done': 'Foram adicionados $1 link(s).'
+	'ils-done-title': 'Concluído!',
+	'ils-done': 'Foram adicionados $1 link(s).',
+	'ils-no-language-links': 'Este artigo não possui links para os idiomas escolhidos.'
 } );
 
 var existingLinks, api,
@@ -212,6 +213,18 @@ function getLanguageLinks(){
 		sourceWikis = $.grep( sourceWikis, function( lang ){
 			return sourcePages[ lang ] !== undefined;
 		} );
+		if( !sourceWikis.length ){
+			removeSpinner();
+			mw.notify(
+				mw.msg( 'ils-no-language-links' ),
+				{
+					autoHide: false,
+					tag: 'internal-links-suggestions',
+					title: mw.msg( 'ils-done-title' )
+				}
+			);
+			return;
+		}
 		getInternalLinks();
 	} )
 	.fail( removeSpinner );
