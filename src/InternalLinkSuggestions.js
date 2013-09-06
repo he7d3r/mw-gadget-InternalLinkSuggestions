@@ -199,7 +199,7 @@ function getLanguageLinks(){
 	} )
 	.done( function ( data ){
 		var i, found = 0,
-			links = data.query.pages[ data.query.pageids[0] ].langlinks;
+			links = data.query.pages[ data.query.pageids[0] ].langlinks || [];
 		for ( i = 0; i < links.length; i++ ){
 			if( $.inArray( links[i].lang, sourceWikis ) !== -1 ){
 				sourcePages[ links[i].lang ] = links[i]['*'];
