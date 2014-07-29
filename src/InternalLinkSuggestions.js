@@ -27,7 +27,7 @@ var existingLinks, api,
 	threshold = 2,
 	suggested = {};
 
-function removeSpinner() {
+function stopSpinner() {
 	$.removeSpinner( 'spinner-internal-links-suggestions' );
 }
 
@@ -88,7 +88,7 @@ function processSuggestions() {
 			title: mw.msg( 'ils-done-title' )
 		}
 	);
-	removeSpinner();
+	stopSpinner();
 }
 
 function processLinksFromOtherWiki( data ) {
@@ -214,7 +214,7 @@ function getLanguageLinks(){
 			return sourcePages[ lang ] !== undefined;
 		} );
 		if( !sourceWikis.length ){
-			removeSpinner();
+			stopSpinner();
 			mw.notify(
 				mw.msg( 'ils-no-language-links' ),
 				{
