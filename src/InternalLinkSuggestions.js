@@ -247,7 +247,7 @@
 		} );
 	}
 
-	if ( $.inArray( mw.config.get( 'wgNamespaceNumber' ), [ 0, 102 ] ) !== -1
+	if ( $.inArray( mw.config.get( 'wgNamespaceNumber' ), mw.config.get( 'wgContentNamespaces' ) ) !== -1
 		&& location.host.indexOf( 'wikipedia.org' ) !== -1
 		&& $.inArray( mw.config.get( 'wgAction' ), [ 'edit', 'submit' ] ) !== -1
 	) {
