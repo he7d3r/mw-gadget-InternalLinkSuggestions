@@ -171,6 +171,9 @@
 		} )
 		.done( function ( data ) {
 			var links = data.query.pages[ data.query.pageids[0] ].links;
+			if ( !links ) {
+				return;
+			}
 			existingLinks = $.map( links, function ( link ) {
 				return link.title;
 			} );
