@@ -62,7 +62,7 @@
 		for ( i = 0; i < wantedLinks.length; i++ ) {
 			oldText = newText;
 			reLink = new RegExp(
-				'([^a-záàâãçéêíñóôõúü\\-])(' + mw.RegExp.escape( wantedLinks[i] ) +
+				'([^a-záàâãçéêíñóôõúü\\-])(' + mw.util.escapeRegExp( wantedLinks[i] ) +
 				')(?![a-záàâãçéêíñóôõúü\\-]|[^\\[]*\\]\\]|.+={1,6}\\n)',
 				'i'
 			);
@@ -243,7 +243,7 @@
 			mw.loader.using( [
 				'mediawiki.api',
 				'jquery.spinner',
-				'mediawiki.RegExp',
+				'mediawiki.util',
 				'mediawiki.notify',
 				'mediawiki.notification'
 			], getLanguageLinks );
