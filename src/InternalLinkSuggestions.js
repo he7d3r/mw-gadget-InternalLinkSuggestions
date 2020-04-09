@@ -244,7 +244,6 @@
 				'mediawiki.api',
 				'jquery.spinner',
 				'mediawiki.util',
-				'mediawiki.notify',
 				'mediawiki.notification'
 			], getLanguageLinks );
 		} );
